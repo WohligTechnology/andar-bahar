@@ -1,0 +1,39 @@
+ @media (min-width: $screen-lg-min) {
+     // Wide Desktop
+     .container-big {
+         width: 1650px;
+         .community-cards {
+             width: 60%;
+         }
+     }
+     .mt100 {
+         margin-top: -100px;
+     }
+     .bg-all {
+         .dealer-name {
+             top: 88px;
+             left: 50%;
+             padding: 6px 30px 3px;
+             font-size: 36px;
+         }
+         .player-number {
+             &.dealer {
+                 top: -57px;
+                 .number {
+                     top: 45%;
+                 }
+             }
+             .img-circle-player {
+                 width: 90px;
+                 height: 92px;
+             }
+             //  &.player-8,
+             //  &.player-1 {
+             //      top: 5%;
+             //  }
+         }
+         .pack-cards {
+             top: 150px;
+         }
+     }
+ }

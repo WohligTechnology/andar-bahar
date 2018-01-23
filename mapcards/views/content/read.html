@@ -1,0 +1,55 @@
+<div class="container">
+    <div>
+        <div class="row">
+            <div class="col-md-4">
+                <h1>Read Card</h1>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <card card="{{mapCard.selected.shortName}}" width="250" height="350"></card>
+        </div>
+        <div class="col-md-4">
+            <h3>Card Details</h3>
+
+            <table class="table table-hover table-bordered">
+                <tbody>
+                    <tr>
+                        <td>Short Name</td>
+                        <td>{{mapCard.selected.shortName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Full Name</td>
+                        <td>{{mapCard.selected.fullName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Color</td>
+                        <td>{{mapCard.selected.colorShort}} ({{mapCard.selected.colorFull}})</td>
+                    </tr>
+                    <tr>
+                        <td>Number</td>
+                        <td>{{mapCard.selected.numberShort}} ({{mapCard.selected.numberFull}})</td>
+                    </tr>
+                    <tr>
+                        <td>RFID UID</td>
+                        <td>{{mapCard.rfidValue}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <h3>Replace Details</h3>
+            <select class="form-control select-card" ng-options="card as (card.shortName +' - '+ card.fullName) for card in allCards"
+                ng-model="replaceWith.value">
+            </select>
+            <button ng-show="replaceWith.value.shortName" ng-click="replaceCard();" class="btn btn-danger">Replace With {{replaceWith.value.shortName +' - '+ replaceWith.value.fullName}}</button>
+        </div>
+        <div class="col-md-4">
+            <pre>{{replaceWith}}</pre>
+        </div>
+
+
+    </div>
+
+</div>

@@ -1,0 +1,6 @@
+apps:
+  - script: "app.js"
+    name: "Poker - 1337"
+    watch: false
+    args: "--prod"
+    exec_mode: "cluster"

@@ -1,0 +1,281 @@
+/* Bootstrap Variables Goes Here */
+
+$brand-primary: #0d9dff !default;
+$brand-success: #84ce3c !default;
+$brand-warning: #ffec39 !default;
+$brand-danger: #d53c2a !default;
+$brand-info: #000072 !default;
+$brand-background: #3d245c;
+$brand-yellow: #fed730;
+$brand-red: #bf3525;
+@import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+
+/* Bootstrap Variables Goes Here */
+
+@import "other/font-fix";
+@font-face {
+    font-family: Budmo Jiggler;
+    src: url(../fonts/budmo-jiggler.ttf);
+}
+
+@font-face {
+    font-family: Budmo Jigglish;
+    src: url(../fonts/budmo-jigglish.ttf);
+}
+
+body {
+    // padding-top: 70px;
+    overflow: hidden;
+}
+
+img.loading {
+    text-align: center;
+    opacity: 1;
+    width: 32px !important;
+    height: auto;
+}
+
+img {
+    opacity: 0;
+    transition: all 300ms ease;
+}
+
+img.doneLoading {
+    opacity: 1;
+}
+
+nav li:hover .dropdown-menu {
+    display: block;
+}
+
+#map img {
+    opacity: 1;
+}
+
+a,
+.btn,
+[ui-sref] {
+    cursor: pointer;
+    transition: all ease 300ms;
+}
+
+.footer {
+    color: #ffd82e;
+    font-size: 16px;
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+    .wohlig {
+        color: #ffd82e;
+        font-family: "AvenirLTStd-Black";
+    }
+}
+
+//bootstrap forms
+.input-lg,
+.input-group-lg>.form-control,
+.input-group-lg>.input-group-addon,
+.input-group-lg>.input-group-btn>.btn,
+.btn,
+.form-control {
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-color: $brand-primary;
+    outline: 0;
+    box-shadow: none;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-invalid {
+    color: $brand-danger;
+    .form-control {
+        border-color: $brand-danger;
+        color: $brand-danger;
+        &::-webkit-input-placeholder {
+            color: $brand-danger;
+        }
+    }
+}
+
+.form-submission {
+    min-height: 300px;
+}
+
+//FLEX SLIDER FIXES
+.flex-direction-nav {
+    a {
+        height: auto;
+    }
+    .flex-prev {
+        left: 10px !important;
+    }
+    .flex-next {
+        right: 10px !important;
+    }
+}
+
+.content {
+    min-height: 450px;
+}
+
+.img-full {
+    width: 100%;
+    display: block;
+}
+
+header {
+    transition: all 300ms ease;
+}
+
+.nav-up {
+    transform: translateY(-100%);
+}
+
+//home page css
+.text-white {
+    color: white;
+    font-family: "AvenirLTStd-Heavy";
+    font-size: 20px;
+}
+
+.text-yellow {
+    color: $brand-yellow;
+    font-family: "AvenirLTStd-Heavy";
+    letter-spacing: 1px;
+    font-size: 36px;
+}
+
+.bg-img {
+    background-image: url(../img/background4.jpg);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-color: $brand-background;
+    background-size: cover;
+    .ab-text {
+        font-family: Budmo Jigglish;
+        font-size: 90px;
+        color: $brand-yellow;
+    }
+}
+
+.title {
+    padding: 20px;
+}
+
+.table-set {
+    margin: 80px 20px 20px 20px;
+    hr {
+        border-top: 5px solid white;
+        margin-top: 10px;
+        margin-bottom: 0; // &:before{
+        //     content: "hello";
+        //     border-right: solid 5px white;
+        // }
+    }
+    .joker {
+        margin: 25px 0;
+        .joker-card {
+            text-align: center;
+        }
+        .card-text {
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            font-family: "AvenirLTStd-Heavy";
+            letter-spacing: 2px;
+        }
+    }
+}
+
+.player-coin {
+    font-size: 155px;
+    line-height: 1;
+    padding: 0;
+    margin: 25px 10px;
+    border-radius: 50%;
+    height: 160px;
+    width: 160px;
+    text-align: center;
+    margin-right: 60px;
+}
+
+.andar,
+.bahar {
+    display: flex;
+    margin: 30px 0;
+    .baharB,
+    .andarA {
+        font-family: Budmo Jiggler;
+    }
+    .andar-card,
+    .bahar-card {
+        width: 150px;
+        position: absolute;
+        img {
+            width: 100%;
+        }
+    }
+    .acards-div,
+    .bcards-div {
+        position: relative;
+    }
+}
+
+.andar {
+    .andarA {
+        background: $brand-danger;
+        color: $brand-yellow;
+    }
+}
+
+.bahar {
+    .baharB {
+        background: $brand-yellow;
+        color: $brand-red;
+    }
+}
+
+.total-wins-a,
+.total-wins-b {
+    display: inline-block;
+    font-size: 40px;
+    font-family: "AvenirLTStd-Heavy";
+    line-height: 1;
+    font-weight: bold;
+    margin: 5px;
+    width: 45px;
+    height: 45px;
+    padding: 6px 0;
+    border-radius: 50%;
+}
+
+.total-wins-a {
+    color: $brand-yellow;
+    background: $brand-red;
+}
+
+.total-wins-b {
+    background: $brand-yellow;
+    color: $brand-red;
+}
+
+.table-style {
+    background: rgba(0, 0, 0, 0.5);
+    tbody {
+        tr {
+            td {
+                padding: 10px;
+            }
+        }
+    }
+}
+
+td.height-150 {
+    height: 150px;
+}

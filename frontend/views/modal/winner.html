@@ -1,0 +1,143 @@
+<div class="row">
+    <!--<pre>{{winner.length}}</pre>-->
+    <div class="col-md-12">
+        <div class="title-winner" ng-if="winner.length > 1">
+            <!--<img src="img/split-pot.png" alt="" width="500px">-->
+            Split pot - Winner - Player <span ng-repeat="winners in winner"> {{winners.playerNo}}{{$last ? '' : ', '}}</span>
+        </div>
+        <div class="title-winner text-center" ng-if="winner.length==1">
+            Winner - <span ng-repeat="winners in winner">Player {{winners.playerNo}}</span>
+        </div>
+    </div>
+    <div class="col-md-12" ng-if="winner.length > 1">
+        <div class="row">
+            <div class="mt-70">
+                <div class="col-md-4" ng-repeat="winners in winner">
+                    <div class="img-winner-holder">
+                        <div class="bubble">
+                            {{winners.descr}}
+                        </div>
+                        <img src="img/winner.png" alt="" class="img-full">
+                        <div class="player-card">
+                            <img src="img/circle-icon.png" alt="" width="60">
+                            <span>{{winners.playerNo}}</span>
+                        </div>
+                        <div class="img-winner-card">
+                            <card card='{{winners.cards[0]}}' ng-style="style" class="img-full">
+                            </card>
+                            <card card='{{winners.cards[1]}}' ng-style="style" class="img-full winner-card-two">
+                            </card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7" ng-if="winner.length==1">
+        <div class="img-winner-holder winner-only-one">
+            <div class="bubble" ng-if="winner[0].descr">
+                {{winner[0].descr}}
+            </div>
+            <img src="img/winner.png" alt="" class="img-full">
+            <div class="player-card">
+                <img src="img/circle-icon.png" alt="" width="95">
+                <span>{{winner[0].playerNo}}</span>
+            </div>
+            <div class="img-winner-card" ng-if="winner[0].descr">
+                <card card='{{winner[0].cards[0]}}' ng-style="style" class="img-full">
+                </card>
+                <card card='{{winner[0].cards[1]}}' ng-style="style" class="img-full winner-card-two">
+                </card>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5" ng-if="winner.length==1">
+        <div class="community-cards-one-winner">
+            <div class="row">
+                <h4 class="text-uppercase"> Community Card</h4>
+                <div class="col-md-2 col-sm-2">
+                    <div class="community-image">
+                        <community community-card="communityCards[1]"></community>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="community-image">
+                        <community community-card="communityCards[2]"></community>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="community-image">
+                        <community community-card="communityCards[3]"></community>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="community-image">
+                        <community community-card="communityCards[5]"></community>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="community-image">
+                        <community community-card="communityCards[7]"></community>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="community-cards mb-20" ng-if="winner.length>1">
+    <div class="row">
+        <div class="col-md-1 col-sm-1"></div>
+        <div class="col-md-2 col-sm-2">
+            <div class="community-image">
+                <community community-card="communityCards[1]"></community>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <div class="community-image">
+                <community community-card="communityCards[2]"></community>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <div class="community-image">
+                <community community-card="communityCards[3]"></community>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <div class="community-image">
+                <community community-card="communityCards[5]"></community>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <div class="community-image">
+                <community community-card="communityCards[7]"></community>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="title-winner text-winner-other text-center" ng-if="showCard.length > 0">
+    Other Player
+</div>
+<div class="row">
+    <div class="mt-70">
+        <div class="col-md-4" ng-repeat="showCards in showCard">
+            <div class="img-winner-holder">
+                <div class="bubble">
+                    {{showCards.descr}}
+                </div>
+                <img src="img/other.png" alt="" class="img-full">
+                <div class="player-card">
+                    <img src="img/circle-icon.png" alt="" width="60">
+                    <span>{{showCards.playerNo}}</span>
+                </div>
+                <div class="rank"> - {{showCards.rank}}</div>
+                <div class="img-winner-card">
+                    <card card='{{showCards.cards[0]}}' ng-style="style" class="img-full">
+                    </card>
+                    <card card='{{showCards.cards[1]}}' ng-style="style" class="img-full winner-card-two">
+                    </card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

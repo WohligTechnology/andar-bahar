@@ -1,0 +1,61 @@
+/* Bootstrap Variables Goes Here */
+
+$brand-primary: #0d9dff !default;
+$brand-success: #84ce3c !default;
+$brand-warning: #ffec39 !default;
+$brand-danger: #fc483f !default;
+$brand-info: #000072 !default;
+$table-icon-font-size:30px !default;
+@import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+
+/* Bootstrap Variables Goes Here */
+
+@import "other/font-fix";
+body {
+    font-family: "AvenirLTStd-Roman";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img.loading {
+    text-align: center;
+    opacity: 1;
+    width: 32px !important;
+    height: auto;
+}
+
+img {
+    opacity: 0;
+    transition: all 300ms ease;
+}
+
+img.doneLoading {
+    opacity: 1;
+}
+
+.select-card {
+    margin: 20px 0;
+}
+
+.success {
+    color: $brand-success;
+    font-size: $table-icon-font-size;
+}
+
+.default {
+    color: $brand-primary;
+    font-size: $table-icon-font-size;
+}
+
+.danger {
+    color: $brand-danger;
+    font-size: $table-icon-font-size;
+}
+
+.normal {
+    font-size: $table-icon-font-size;
+}
+
+.template.content {
+    margin-top: 50px;
+}

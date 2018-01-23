@@ -1,0 +1,122 @@
+<div class="bg-img">
+    <div class="title">
+        <div class="pull-left"><img src="img/logo.png" width="120"></div>
+        <div class="pull-right"><img src="img/logo.png" width="120"></div>
+        <div class="text-center ab-text">ANDAR BAHAR</div>
+        <button class="btn btn-primary" ng-click="randomCard();">Serve Card</button>
+        <button class="btn btn-danger" ng-click="newGame();">New game</button>
+        
+        <div class="table-set">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="joker">
+                        <div class="joker-card">
+                            <!--<img src="img/cards/JC.svg" class="img-full">-->
+                            <joker card='{{joker}}'></joker>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="andar">
+                        <div class="player-coin andarA">A</div>
+                        <div class="acards-div">
+                            <div class="andar-card card-{{$index}}" style="left:calc({{$index}} * 45px)" ng-repeat="acard in andarcards track by $index">
+                                <card card='{{acard}}'></card>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="bahar">
+                        <div class="player-coin baharB">B</div>
+                        <div class="bcards-div">
+                            <div class="bahar-card" ng-repeat="bcard in baharcards track by $index" style="left:calc({{$index}} * 45px)">
+                                <card card='{{bcard}}'></card>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <table class="table table-bordered table-style" border="1">
+                    <tr>
+                        <td align="center">
+                            <!--<span class="text-yellow">ANDAR</span>-->
+                            <div class="total-wins-a">A</div>
+                        </td>
+                        <td align="center"><span class="text-yellow">20</span></td>
+                        <td align="center"><span class="text-yellow">40%</span></td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <!--<span class="text-yellow">BAHAR</span>-->
+                            <div class="total-wins-b">B</div>
+                        </td>
+                        <td align="center"><span class="text-yellow">30</span></td>
+                        <td align="center"><span class="text-yellow">60%</span></td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <span class="text-yellow">Total Match</span>
+                        </td>
+                        <td align="center"><span class="text-yellow">50</span></td>
+                        <td align="center"><span class="text-yellow">100%</span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-9">
+                <table class="table table-bordered table-style" border="1">
+                    <tr>
+                        <td align="center">
+                            <span class="text-yellow">LAST WINS !</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" class="height-150">
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                            <div class="total-wins-a">A</div>
+                            <div class="total-wins-b">B</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="footer">
+                Powered by
+                <span class="wohlig"> Wohlig Transformations Pvt. Ltd.</span>
+            </div>
+        </div>
+    </div>
