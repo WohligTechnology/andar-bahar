@@ -57,9 +57,6 @@ var controller = {
     getAll: function (req, res) {
         Player.getAll(req.body, res.callback);
     },
-    // moveTurn: function (req, res) {
-    //     Player.changeTurn(res.callback);
-    // },
 
     showPlayerCard: function (req, res) {
         Player.showPlayerCard(req.body, res.callback);

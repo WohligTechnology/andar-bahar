@@ -26,7 +26,7 @@ schema.plugin(deepPopulate, {});
 schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 
-module.exports = mongoose.model('CommunityCards', schema);
+module.exports = mongoose.model('', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
@@ -46,7 +46,7 @@ var model = {
         });
         callback(null, "Cards Created");
     },
-    findWinner: function (players, communityCards, callback) {
+    findWinner: function (players, callback) {
         var playerCardsNotPresent = _.findIndex(players, function (player) {
             return player.cards.length === 0;
         });
@@ -56,19 +56,9 @@ var model = {
         }
 
         //Check All Community Cards are Distributed
-        var communityCardsNoDistributed = _.findIndex(communityCards, function (commu) {
-            return commu.cardValue === "";
-        });
-        if (communityCardsNoDistributed >= 0) {
-            callback("Community Cards not Distributed");
-            return 0;
-        }
 
         _.each(players, function (player) {
             player.allCards = _.cloneDeep(player.cards);
-            _.each(communityCards, function (commu) {
-                player.allCards.push(commu.cardValue);
-            });
             player.hand = Hand.solve(player.allCards);
             player.winName = player.hand.name;
             player.descr = player.hand.descr;
@@ -108,27 +98,20 @@ var model = {
         callback();
     },
     removeCards: function (data, callback) {
-        CommunityCards.find().sort({
-            cardNo: 1
-        }).exec(function (err, allCards) {
+
+        var cards = _.filter(allCards, function (n, index) {
+            return (index >= data.cardIndex);
+        });
+        console.log(cards);
+        async.concat(cards, function (card, callback) {
+            card.cardValue = "";
+            card.save(callback);
+        }, function (err, data) {
             if (err) {
                 callback(err);
             } else {
-                var cards = _.filter(allCards, function (n, index) {
-                    return (index >= data.cardIndex);
-                });
-                console.log(cards);
-                async.concat(cards, function (card, callback) {
-                    card.cardValue = "";
-                    card.save(callback);
-                }, function (err, data) {
-                    if (err) {
-                        callback(err);
-                    } else {
-                        callback(err, data);
-                        Player.blastSocket();
-                    }
-                });
+                callback(err, data);
+                Player.blastSocket();
             }
         });
     },

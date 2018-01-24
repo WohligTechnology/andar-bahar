@@ -63,11 +63,16 @@ a,
     color: #ffd82e;
     font-size: 16px;
     position: fixed;
-    bottom: 50px;
-    left: 50px;
+    bottom: 30px;
+    left: 20px;
     .wohlig {
         color: #ffd82e;
         font-family: "AvenirLTStd-Black";
+        text-decoration: none;
+        &:hover {
+            color: #ffd82e;
+            text-decoration: none;
+        }
     }
 }
 
@@ -152,10 +157,10 @@ header {
 }
 
 .bg-img {
-    background-image: url(../img/background4.jpg);
+    background: url(../img/background4.jpg);
     background-repeat: no-repeat;
-    background-position: top;
-    background-color: $brand-background;
+    background-position: center center;
+    background-color: #338da4;
     background-size: cover;
     .ab-text {
         font-family: Budmo Jigglish;
