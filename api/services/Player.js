@@ -118,10 +118,10 @@ var model = {
                 );
             },
         }, function (err, data) {
-            // console.log(err, data);
             if (err) {
                 callback(err);
             } else {
+
                 callback(err, data);
             }
         });
@@ -149,8 +149,7 @@ var model = {
         async.parallel({
             players: function (callback) {
                 Player.find({
-                    isActive: true,
-                    isFold: false
+                    isActive: true
                 }).lean().exec(callback);
             }
         }, function (err, data) {
@@ -348,7 +347,6 @@ var model = {
         });
     },
     serve: function (data, callback) {
-
         async.parallel({
             players: function (callback) {
                 Player.find({
@@ -369,7 +367,7 @@ var model = {
                                 callback(err, data[gameIndex]);
                             } else {
                                 var normalGameIndex = _.findIndex(data, function (game) {
-                                    return game.name == 'Normal';
+                                    return game.name == 'Joker';
                                 });
                                 if (normalGameIndex >= 0) {
                                     callback(err, data[normalGameIndex]);
@@ -387,12 +385,12 @@ var model = {
             var playerCards = [];
             var currentGame = "Joker";
             var playerCount = response.players.length;
-            var dealerNo = 1;
+            var dealerNo = 2;
             var maxCardsPerPlayer = 26;
             _.each(response.players, function (player, index) {
                 playerCards = _.concat(playerCards, player.cards);
                 if (player.isDealer) {
-                    dealerNo = index;
+                    dealerNo = 2;
                 }
             });
             allCards = _.concat(playerCards);
@@ -416,7 +414,7 @@ var model = {
                 callback("Duplicate Entry - Card Already Used");
                 return 0;
             }
-            console.log("Joker", allCards.length);
+            // console.log("Joker", allCards.length);
             if (currentGame == 'Joker' && allCards.length == 0 && _.isEmpty(response.currentGameType.jokerCard)) {
                 response.currentGameType.jokerCard = data.card;
                 playerServe = false;
@@ -428,11 +426,20 @@ var model = {
                 });
 
             } else {
+                console.log(response);
                 if (playerCards.length < (playerCount * maxCardsPerPlayer)) {
                     // Add card to Players
                     var remainder = playerCards.length % playerCount;
                     var toServe = (dealerNo + remainder + 1) % playerCount;
+                    console.log("toServe", toServe);
                     var toServePlayer = response.players[toServe];
+                    console.log("toServePlayer", toServePlayer);
+                    var jokerCardWinner = _.split(response.currentGameType.jokerCard, '', 2);
+                    var cardWinner = _.split(data.card, '', 2);
+                    if (jokerCardWinner[0] = cardWinner[0]) {
+                        console.log("winner");
+                    }
+                    console.log(toServePlayer);
                     toServePlayer.cards.push(data.card);
                     toServePlayer.save(function (err, data) {
                         if (err) {
@@ -440,7 +447,7 @@ var model = {
                         } else {
                             callback(err, "Card Provided to Player " + response.players[toServe].playerNo);
                             if (playerCards.length + 1 == (playerCount * maxCardsPerPlayer)) {
-                                Player.makeTurn("LastPlayerCard", function (err, data) {
+                                Player.makeTurn("", function (err, data) {
                                     Player.blastSocket({
                                         player: true,
                                         value: response.players[toServe].playerNo

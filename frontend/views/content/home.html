@@ -12,7 +12,7 @@
                     <div class="joker">
                         <div class="joker-card">
                             <!--<img src="img/cards/JC.svg" class="img-full">-->
-                            <joker card='{{joker}}'></joker>
+                           <joker ng-game-type="gameType"></joker>
                         </div>
                     </div>
                 </div>
@@ -20,8 +20,8 @@
                     <div class="andar">
                         <div class="player-coin andarA">A</div>
                         <div class="acards-div">
-                            <div class="andar-card card-{{$index}}" style="left:calc({{$index}} * 45px)" ng-repeat="acard in andarcards track by $index">
-                                <card card='{{acard}}'></card>
+                            <div class="andar-card card-{{$index}}" ng-repeat="andarCard in playerOneCards track by $index" style="left:calc({{$index}} * 45px)">
+                                <card card='{{andarCard}}'></card>
                             </div>
                         </div>
                     </div>
@@ -29,8 +29,8 @@
                     <div class="bahar">
                         <div class="player-coin baharB">B</div>
                         <div class="bcards-div">
-                            <div class="bahar-card" ng-repeat="bcard in baharcards track by $index" style="left:calc({{$index}} * 45px)">
-                                <card card='{{bcard}}'></card>
+                            <div class="bahar-card" ng-repeat="baharCard in playerTwoCards track by $index" style="left:calc({{$index}} * 45px)">
+                                <card card='{{baharCard}}'></card>
                             </div>
                         </div>
                     </div>

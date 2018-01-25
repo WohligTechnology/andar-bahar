@@ -18,6 +18,7 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
     $scope.baharcards = ["6C", "6D", "6H", "6S", "4C", "4D", "2S", "2C", "2D", "2H", "2S", "8C", "8D", "6H", "2C", "2D", "2H", "2S", "8C", "8D", "6H", "2C", "2D"];
     $scope.randomCard = function () {
         apiService.randomCard();
+            $scope.updatePlayers();
     };
 
     $scope.newGame = function () {
@@ -29,18 +30,15 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
 
     $scope.updatePlayers = function () {
         apiService.getAll(function (data) {
-            console.log(data);
-            $scope.allPlayers = data.data.data.playerCards;
-            $scope.playersChunk = _.chunk(data.data.data.playerCards, 2);
-            _.each($scope.allPlayers, function (n) {
-                if (n.isDealer) {
-                    $scope.dealer = {
-                        dealerPlayer: 1
-                    };
-                }
-            });
+            console.log(data.data.data.playerCards[0]);
+            $scope.cardServed = data.data.data.cardServed;
+            $scope.gameType = data.data.data.currentGameType;
+            $scope.playerOneCards = data.data.data.playerCards[0].cards;
+            $scope.playerTwoCards = data.data.data.playerCards[1].cards;
+            $scope.showWinner = data.data.data.showWinner;
         });
     };
+    $scope.updatePlayers();
 })
 
 .controller('LinksCtrl', function ($scope, TemplateService, NavigationService, $timeout, toastr, $http) {
