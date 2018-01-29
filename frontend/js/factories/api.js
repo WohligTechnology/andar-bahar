@@ -9,6 +9,15 @@ myApp.factory('apiService', function ($http, $q, $timeout) {
                 callback(data);
             });
         },
+        findWinnerlogs: function (callback) {
+            $http({
+                url: adminurl + 'WinnerLogs/findWinnersLogs',
+                method: 'POST',
+                data:{}
+            }).then(function (data) {
+                callback(data);
+            });
+        },
         randomCard: function () {
             var cardValue = cards[_.random(0, cards.length - 3)].name;
             console.log(cardValue);

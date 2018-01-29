@@ -1,6 +1,7 @@
 var schema = new Schema({
     players: Schema.Types.Mixed,
-    cards: Schema.Types.Mixed
+    cards: Schema.Types.Mixed,
+    winner:JSON
 });
 
 schema.plugin(deepPopulate, {});

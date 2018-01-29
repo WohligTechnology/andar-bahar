@@ -5,14 +5,13 @@
         <div class="text-center ab-text">ANDAR BAHAR</div>
         <button class="btn btn-primary" ng-click="randomCard();">Serve Card</button>
         <button class="btn btn-danger" ng-click="newGame();">New game</button>
-        
         <div class="table-set">
             <div class="row">
                 <div class="col-md-2">
                     <div class="joker">
                         <div class="joker-card">
                             <!--<img src="img/cards/JC.svg" class="img-full">-->
-                           <joker ng-game-type="gameType"></joker>
+                            <joker ng-game-type="gameType"></joker>
                         </div>
                     </div>
                 </div>
@@ -42,10 +41,13 @@
                 <table class="table table-bordered table-style" border="1">
                     <tr>
                         <td align="center">
-                            <!--<span class="text-yellow">ANDAR</span>-->
                             <div class="total-wins-a">A</div>
                         </td>
-                        <td align="center"><span class="text-yellow">20</span></td>
+                        <td align="center">
+                            <span class="text-yellow" ng-repeat="winnerLogsPlayer in winnerLogsPlayers" ng-if="winnerLogsPlayer.logs.playerNo==1">
+                              
+                            </span>
+                        </td>
                         <td align="center"><span class="text-yellow">40%</span></td>
                     </tr>
                     <tr>
@@ -74,42 +76,10 @@
                     </tr>
                     <tr>
                         <td align="center" class="height-150">
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
-                            <div class="total-wins-a">A</div>
-                            <div class="total-wins-b">B</div>
+                            <div ng-repeat="winnerLogsPlayer in winnerLogsPlayers" class="inline-block">
+                                <div class="total-wins-a" ng-if="winnerLogsPlayer.logs.playerNo==1">A</div>
+                                <div class="total-wins-b" ng-if="winnerLogsPlayer.logs.playerNo==2">B</div>
+                            </div>
                         </td>
                     </tr>
                 </table>

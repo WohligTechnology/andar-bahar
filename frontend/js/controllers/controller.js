@@ -13,12 +13,9 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             }, 5000);
         });
     };
-    $scope.jokerCard = "JD";
-    $scope.andarcards = ["2C", "2D", "2H", "2S", "8C", "8D", "6H", "2C", "2D", "2H", "2S", "8C", "8D", "6H", "2C", "2D", "2H", "2S", "8C", "8D", "6H", "2C", "2D"];
-    $scope.baharcards = ["6C", "6D", "6H", "6S", "4C", "4D", "2S", "2C", "2D", "2H", "2S", "8C", "8D", "6H", "2C", "2D", "2H", "2S", "8C", "8D", "6H", "2C", "2D"];
     $scope.randomCard = function () {
         apiService.randomCard();
-            $scope.updatePlayers();
+        $scope.updatePlayers();
     };
 
     $scope.newGame = function () {
@@ -27,7 +24,6 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
             $scope.updatePlayers();
         });
     };
-
     $scope.updatePlayers = function () {
         apiService.getAll(function (data) {
             console.log(data.data.data.playerCards[0]);
@@ -39,6 +35,13 @@ myApp.controller('HomeCtrl', function ($scope, TemplateService, NavigationServic
         });
     };
     $scope.updatePlayers();
+    $scope.winnerLogs = function () {
+        apiService.findWinnerlogs(function (data) {
+            $scope.winnerLogsPlayers = data.data.data;
+        });
+
+    };
+    $scope.winnerLogs();
 })
 
 .controller('LinksCtrl', function ($scope, TemplateService, NavigationService, $timeout, toastr, $http) {

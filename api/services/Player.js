@@ -111,7 +111,6 @@ var model = {
                                 });
 
                                 callback(err, data[normalGameIndex]);
-
                             }
                         }
                     }
@@ -237,90 +236,6 @@ var model = {
         readLastValue = "";
         cardServed = false;
     },
-    makeDealer: function (data, callback) {
-        var Model = Player;
-        async.waterfall([
-            function (callback) {
-                Player.update({}, {
-                    $set: {
-                        isDealer: true
-                    }
-                }, {
-                    multi: true
-                }, callback);
-            },
-            function (val, callback) {
-                Player.find({
-                    isActive: true
-                }).exec(function (err, players) {
-                    if (err) {
-                        callback(err);
-                    } else {
-                        var playerIndex = _.findIndex(players, function (player) {
-                            return player.playerNo == 1;
-                        });
-                        if (playerIndex >= 0) {
-                            async.parallel({
-                                addDealer: function (callback) {
-                                    players[playerIndex].isDealer = true;
-                                    players[playerIndex].save(callback);
-                                },
-                            }, function (err, data) {
-                                Model.blastSocket();
-                                callback(err, data);
-                            });
-                        } else {
-                            callback("No Such Player");
-                        }
-                    }
-                });
-            }
-        ], callback);
-    },
-    removeDealer: function (data, callback) {
-        var Model = this;
-        Model.findOneAndUpdate({
-            playerNo: data.tabId
-        }, {
-            $set: {
-                isDealer: true
-            }
-        }, {
-            new: true
-        }, function (err, CurrentTab) {
-            callback(err, CurrentTab);
-        });
-    },
-    removeTab: function (data, callback) {
-        var Model = this;
-        Model.findOneAndUpdate({
-            playerNo: data.tabId
-        }, {
-            $set: {
-                isActive: false
-            }
-        }, {
-            new: true
-        }, function (err, currentTab) {
-            Player.blastSocket();
-            callback(err, currentTab);
-        });
-    },
-    addTab: function (data, callback) {
-        var Model = this;
-        Model.findOneAndUpdate({
-            playerNo: data.tabId
-        }, {
-            $set: {
-                isActive: true
-            }
-        }, {
-            new: true
-        }, function (err, CurrentTab) {
-            Player.blastSocket();
-            callback(err, CurrentTab);
-        });
-    },
     assignCard: function (card, wfCallback) {
         var Model = this;
         Model.findOneAndUpdate({
@@ -419,48 +334,49 @@ var model = {
                 response.currentGameType.jokerCard = data.card;
                 playerServe = false;
                 response.currentGameType.save(function (err, data1) {
-                    console.log("JokerCard assigned", data.card);
                     Player.blastSocket();
-                    callback(err, "JokerCard assigned");
                     return 0;
                 });
 
             } else {
-                console.log(response);
                 if (playerCards.length < (playerCount * maxCardsPerPlayer)) {
                     // Add card to Players
                     var remainder = playerCards.length % playerCount;
                     var toServe = (dealerNo + remainder + 1) % playerCount;
-                    console.log("toServe", toServe);
                     var toServePlayer = response.players[toServe];
-                    console.log("toServePlayer", toServePlayer);
                     var jokerCardWinner = _.split(response.currentGameType.jokerCard, '', 2);
                     var cardWinner = _.split(data.card, '', 2);
-                    if (jokerCardWinner[0] = cardWinner[0]) {
-                        console.log("winner");
-                    }
-                    console.log(toServePlayer);
-                    toServePlayer.cards.push(data.card);
-                    toServePlayer.save(function (err, data) {
-                        if (err) {
-                            callback(err);
-                        } else {
-                            callback(err, "Card Provided to Player " + response.players[toServe].playerNo);
-                            if (playerCards.length + 1 == (playerCount * maxCardsPerPlayer)) {
-                                Player.makeTurn("", function (err, data) {
+                    
+                    if (jokerCardWinner[0] == cardWinner[0]) {
+                        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",jokerCardWinner[0])
+                    console.log("###############################",cardWinner[0])
+                        var winner = toServePlayer;
+                        WinnerLogs.saveData({logs:winner}, callback);
+                    } else {
+                        toServePlayer.cards.push(data.card);
+                        toServePlayer.save(function (err, data) {
+                            if (err) {
+                                callback(err);
+                            } else {
+                                callback(err, "Card Provided to Player " + response.players[toServe].playerNo);
+                                if (playerCards.length + 1 == (playerCount * maxCardsPerPlayer)) {
+                                    Player.makeTurn("", function (err, data) {
+                                        Player.blastSocket({
+                                            player: true,
+                                            value: response.players[toServe].playerNo
+                                        });
+                                    });
+                                } else {
                                     Player.blastSocket({
                                         player: true,
                                         value: response.players[toServe].playerNo
                                     });
-                                });
-                            } else {
-                                Player.blastSocket({
-                                    player: true,
-                                    value: response.players[toServe].playerNo
-                                });
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+
+
                 } else {
                     callback("All Cards are Served");
                     return 0;
