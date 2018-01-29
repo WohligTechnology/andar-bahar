@@ -10,7 +10,9 @@ module.exports = mongoose.model('WinnerLogs', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
     findWinnersLogs: function (data, callback) {
-        WinnerLogs.find({}).sort({
+        WinnerLogs.find({
+            
+        }).sort({
             createdAt: -1
         }).limit(50).exec(
             function (err, data) {
